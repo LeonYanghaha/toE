@@ -1,0 +1,23 @@
+{
+  "name": "toe",
+  "version": "1.0.0",
+  "description": "PDF editor",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Yangk030208/toE.git"
+  },
+  "keywords": [
+    "pdf",
+    "html"
+  ],
+  "author": "Yangk.",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Yangk030208/toE/issues"
+  },
+  "homepage": "https://github.com/Yangk030208/toE#readme"
+}
