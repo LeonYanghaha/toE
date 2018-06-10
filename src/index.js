@@ -1,25 +1,29 @@
-const path = require('path')
-// const glob = require('glob')
+const path = require('path');
 const electron = require('electron');
-
 
 const BrowserWindow = electron.BrowserWindow;
 const app = electron.app;
 
 const debug = /--debug/.test(process.argv[2]);
+const ipc = require('electron').ipcMain;
+const dialog = require('electron').dialog;
 
 if (process.mas) app.setName('Electron APIs');
 
-var mainWindow = null;
-
+let mainWindow = null;
+/*
+* Describe:
+* Date:2018-06-09  17:25
+* By Yangk. 
+**/
 function initialize () {
-  var shouldQuit = makeSingleInstance();
+  let shouldQuit = makeSingleInstance();
   if (shouldQuit) return app.quit();
 
   loadDemos();
 
   function createWindow () {
-    var windowOptions = {
+    let windowOptions = {
       width: 1080,
       minWidth: 680,
       height: 840,
@@ -31,7 +35,7 @@ function initialize () {
     // }
 
     mainWindow = new BrowserWindow(windowOptions);
-    mainWindow.loadURL(path.join('file://', __dirname, '/index.html'));
+    mainWindow.loadURL(path.join('file://', __dirname, '/page/index.html'));
 
     // Launch fullscreen with DevTools open, usage: npm run debug
     // if (debug) {
@@ -61,6 +65,15 @@ function initialize () {
       createWindow()
     }
   })
+
+
+
+
+
+
+
+
+
 }
 
 function makeSingleInstance () {
@@ -76,7 +89,7 @@ function makeSingleInstance () {
 
 // Require each JS file in the main-process dir
 function loadDemos () {
-  // var files = glob.sync(path.join(__dirname, 'main-process/**/*.js'))
+  // let files = glob.sync(path.join(__dirname, 'main-process/**/*.js'))
   // files.forEach(function (file) {
   //   require(file)
   // })
@@ -85,6 +98,11 @@ function loadDemos () {
 }
 
 
+/*
+* Describe:
+* Date:2018-06-09  17:25
+* By Yangk. 
+**/
 (()=>{
 
   initialize();

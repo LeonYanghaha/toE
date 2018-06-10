@@ -1,36 +1,35 @@
 const electron = require('electron');
+const ipc = require('electron').ipcMain;
 const dialog = electron.dialog;
 
-let menuCommand = {};
 
+
+
+
+let menuCommand = {};
+/*
+* Describe:
+* Date:2018-06-09  17:25
+* By Yangk. 
+**/
 menuCommand.newFile = ()=>{
+  console.log("newFile");
 
 };
 
-menuCommand.openFile = ()=> {
+menuCommand.openFile = (item, focusedWindow)=> {
 
 
-  dialog.showOpenDialog({
-    defaultPath :defaultpath,
-    properties: [
-      'openFile',
-    ],
-    filters: [
-      { name: 'zby', extensions: ['json'] },
-    ]
-  },function(res){
-    callback(res[0]) //我这个是打开单个文件的
-  })
 
 
 };
 
 menuCommand.saveFile = ()=> {
-
+  console.log("saveFile");
 };
 
 menuCommand.saveNewFile = ()=> {
-
+  console.log("saveNewFile");
 };
 
 exports.menuCommand = menuCommand ;

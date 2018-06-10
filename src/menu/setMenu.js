@@ -3,7 +3,16 @@ const BrowserWindow = electron.BrowserWindow;
 const Menu = electron.Menu;
 const app = electron.app;
 const menuCommand = require('./menuCommand');
+const dialog = electron.dialog;
 
+
+const ipc = electron.ipcRenderer;
+
+/*
+* Describe:
+* Date:2018-06-09  17:20
+* By Yangk.
+**/
 let template = [{
   label: '文件',
   submenu: [{
@@ -14,9 +23,15 @@ let template = [{
     }
   }, {
     label: '打开',
-    accelerator: 'Shift+CmdOrCtrl+O',
-    click: function (item, focusedWindow) {
-      menuCommand.openFile;
+    accelerator: 'CmdOrCtrl+O',
+    click: function () {
+        dialog.showOpenDialog({
+          properties: ['openFile']
+        }, function (files) {
+          if (files) {
+            console.log(files);
+          }
+        })
     }
   }, {
     type: 'separator'
@@ -39,7 +54,7 @@ let template = [{
   }, {
     label: '退出',
     accelerator: 'CmdOrCtrl+A',
-    role: 'selectall'
+    role: 'quit'
   }]
 }, {
   label: '查看',
@@ -245,7 +260,7 @@ app.on('ready', function () {
 app.on('browser-window-created', function () {
   let reopenMenuItem = findReopenMenuItem();
   if (reopenMenuItem) reopenMenuItem.enabled = false
-})
+});
 
 app.on('window-all-closed', function () {
   let reopenMenuItem = findReopenMenuItem();
