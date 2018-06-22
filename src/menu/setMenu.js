@@ -1,11 +1,11 @@
 const electron = require('electron');
 const BrowserWindow = electron.BrowserWindow;
+const webContents = electron.webContents;
 const Menu = electron.Menu;
 const app = electron.app;
 const menuCommand = require('./menuCommand');
 const dialog = electron.dialog;
-
-
+const fs = require('fs');
 const ipc = electron.ipcRenderer;
 
 /*
@@ -27,9 +27,35 @@ let template = [{
     click: function () {
         dialog.showOpenDialog({
           properties: ['openFile']
-        }, function (files) {
-          if (files) {
-            console.log(files);
+        }, async function (filesList) {
+          if (filesList) {
+            let selectFileNum = filesList.length ;
+            let temp = webContents.fromId(1);
+            // console.log(temp);
+
+            if(selectFileNum != 1 ){ //  给页面一个错误的提示
+
+                dialog.showErrorBox("错误", "请选择一个文件！")
+            }
+            // 判断文件格式是否是PDF
+            let selectFilePath = filesList[0];
+            let selectFileInfo = '';
+            await new Promise(function (resolve, reject) {
+                  fs.stat(selectFilePath,function (err, stats) {
+
+                      if (err) {
+                          console.error(err);
+                          reject();
+                      }
+                      selectFileInfo = stats ;
+                      resolve();
+
+                  });
+              });
+
+            console.log(selectFileInfo);
+
+
           }
         })
     }

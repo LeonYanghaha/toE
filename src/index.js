@@ -27,7 +27,8 @@ function initialize () {
       width: 1080,
       minWidth: 680,
       height: 840,
-      title: app.getName()
+      title: app.getName(),
+      icon: __dirname + '/page/assets/img/logo.png',
     };
 
     // if (process.platform === 'linux') {
@@ -39,7 +40,7 @@ function initialize () {
 
     // Launch fullscreen with DevTools open, usage: npm run debug
     // if (debug) {
-      mainWindow.webContents.openDevTools();
+    //   mainWindow.webContents.openDevTools();
     //   mainWindow.maximize();
     //   require('devtron').install()
     // }
